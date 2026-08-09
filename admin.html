@@ -3,159 +3,257 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Dashboard | Real Estate Management</title>
+    <title>CRM Admin Dashboard | Shree Shyam Property</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="style.css">
 </head>
-<body>
+<body style="background: #F1F5F9;">
 
-    <div class="admin-layout">
+    <!-- 1. CRM LOGIN SCREEN (No Alert Popups) -->
+    <div id="crm-auth-screen" class="crm-auth-wrapper">
+        <div class="crm-login-card">
+            <i class="fas fa-building fa-3x" style="color: var(--accent); margin-bottom: 15px;"></i>
+            <h2 class="brand-font">CRM PORTAL LOGIN</h2>
+            <p>Access Shree Shyam Property Control Suite</p>
+
+            <form onsubmit="handleCrmLogin(event)">
+                <div class="form-group" style="margin-bottom: 15px;">
+                    <label>Username</label>
+                    <input type="text" id="crm-user" class="form-control" required placeholder="admin" value="admin">
+                </div>
+                <div class="form-group" style="margin-bottom: 20px;">
+                    <label>Password</label>
+                    <input type="password" id="crm-pass" class="form-control" required placeholder="••••••••">
+                </div>
+                <button type="submit" class="btn btn-primary" style="width: 100%;">Sign In to CRM</button>
+            </form>
+            <p style="margin-top: 15px; font-size: 0.8rem; color: var(--text-muted);">Default Credentials: admin / shyam</p>
+        </div>
+    </div>
+
+    <!-- 2. FULL CRM APPLICATION SUITE -->
+    <div id="crm-app-screen" class="crm-layout" style="display: none;">
         <!-- Sidebar Navigation -->
-        <aside class="admin-sidebar">
-            <h2 class="brand-font" data-brand="name">REAL ESTATE ADMIN</h2>
-            <ul class="admin-menu">
-                <li><a href="#dashboard" class="active"><i class="fas fa-chart-line"></i> Dashboard</a></li>
-                <li><a href="#manage-props"><i class="fas fa-building"></i> Properties</a></li>
-                <li><a href="#enquiries"><i class="fas fa-envelope"></i> Lead Enquiries</a></li>
-                <li><a href="index.html" target="_blank"><i class="fas fa-external-link-alt"></i> View Website</a></li>
+        <aside class="crm-sidebar">
+            <div class="brand">
+                <i class="fas fa-building" style="color:var(--accent)"></i>
+                <span>SSP CRM PORTAL</span>
+            </div>
+            <ul class="crm-menu">
+                <li><a href="#" class="active" onclick="switchCrmTab('dashboard', this)"><i class="fas fa-chart-pie"></i> Dashboard</a></li>
+                <li><a href="#" onclick="switchCrmTab('properties', this)"><i class="fas fa-home"></i> Manage Properties</a></li>
+                <li><a href="#" onclick="switchCrmTab('leads', this)"><i class="fas fa-users"></i> Lead CRM</a></li>
+                <li><a href="#" onclick="switchCrmTab('config', this)"><i class="fas fa-cog"></i> Site Settings</a></li>
+                <li style="margin-top: 30px;"><a href="index.html" target="_blank"><i class="fas fa-external-link-alt"></i> View Public Site</a></li>
+                <li><a href="#" onclick="handleCrmLogout()" style="color: var(--danger);"><i class="fas fa-sign-out-alt"></i> Sign Out</a></li>
             </ul>
         </aside>
 
-        <!-- Admin Content Section -->
-        <main class="admin-content">
+        <!-- Main Content Area -->
+        <main class="crm-content">
             
-            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 25px;">
-                <h1>Control Panel Overview</h1>
-                <button class="btn btn-accent" onclick="document.getElementById('add-prop-modal').classList.add('active')"><i class="fas fa-plus"></i> Add New Property</button>
+            <!-- Topbar Header -->
+            <div class="crm-topbar">
+                <div>
+                    <h2 style="font-size: 1.4rem;">Property & Lead Operations</h2>
+                    <p style="font-size: 0.85rem; color: var(--text-muted);">Control listings, incoming inquiries, and contact information.</p>
+                </div>
+                <button class="btn btn-accent" onclick="openAddPropertyModal()"><i class="fas fa-plus"></i> Add New Property</button>
             </div>
 
-            <!-- Stats Overview -->
-            <div id="admin-stats" class="admin-stats">
-                <div class="stat-box">
-                    <h4>Total Properties</h4>
-                    <p id="stat-total-props">0</p>
-                </div>
-                <div class="stat-box">
-                    <h4>Total Lead Enquiries</h4>
-                    <p id="stat-total-enqs">0</p>
-                </div>
-                <div class="stat-box">
-                    <h4>Active Builder Projects</h4>
-                    <p id="stat-total-projs">0</p>
-                </div>
-            </div>
-
-            <!-- Manage Properties List -->
-            <div class="admin-card">
-                <h3>Active Property Listings</h3>
-                <div class="table-responsive">
-                    <table class="data-table">
-                        <thead>
-                            <tr>
-                                <th>ID</th>
-                                <th>Title</th>
-                                <th>Type</th>
-                                <th>Price</th>
-                                <th>Location</th>
-                                <th>Action</th>
-                            </tr>
-                        </thead>
-                        <tbody id="admin-props-tbody">
-                            <!-- Injected via app.js -->
-                        </tbody>
-                    </table>
+            <!-- DASHBOARD TAB -->
+            <div id="crm-tab-dashboard" class="crm-view-section">
+                <div class="crm-grid-stats">
+                    <div class="crm-stat-card">
+                        <h4>Total Properties</h4>
+                        <div class="value" id="stat-props-count">0</div>
+                    </div>
+                    <div class="crm-stat-card">
+                        <h4>Total Leads / Enquiries</h4>
+                        <div class="value" id="stat-enqs-count">0</div>
+                    </div>
+                    <div class="crm-stat-card">
+                        <h4>Builder Projects</h4>
+                        <div class="value" id="stat-projs-count">0</div>
+                    </div>
+                    <div class="crm-stat-card">
+                        <h4>System Status</h4>
+                        <div class="value" style="color:var(--success); font-size:1.2rem; margin-top:5px;">ONLINE</div>
+                    </div>
                 </div>
             </div>
 
-            <!-- Lead Enquiries List -->
-            <div class="admin-card">
-                <h3>Recent Customer Enquiries</h3>
-                <div class="table-responsive">
-                    <table class="data-table">
-                        <thead>
-                            <tr>
-                                <th>Date</th>
-                                <th>Name</th>
-                                <th>Contact</th>
-                                <th>Interest</th>
-                                <th>Message</th>
-                                <th>Status</th>
-                                <th>Action</th>
-                            </tr>
-                        </thead>
-                        <tbody id="admin-enq-tbody">
-                            <!-- Injected via app.js -->
-                        </tbody>
-                    </table>
+            <!-- PROPERTIES TAB -->
+            <div id="crm-tab-properties" class="crm-view-section" style="display: none;">
+                <div class="crm-panel-card">
+                    <div class="card-header">
+                        <h3>All Listed Properties</h3>
+                        <button class="btn btn-primary btn-sm" onclick="openAddPropertyModal()"><i class="fas fa-plus"></i> Add Listing</button>
+                    </div>
+                    <div class="table-responsive">
+                        <table class="crm-table">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Title</th>
+                                    <th>Type</th>
+                                    <th>Price</th>
+                                    <th>Location</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="crm-props-table"></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- LEADS CRM TAB -->
+            <div id="crm-tab-leads" class="crm-view-section" style="display: none;">
+                <div class="crm-panel-card">
+                    <div class="card-header">
+                        <h3>Lead Pipeline Management</h3>
+                    </div>
+                    <div class="table-responsive">
+                        <table class="crm-table">
+                            <thead>
+                                <tr>
+                                    <th>Date</th>
+                                    <th>Lead Name</th>
+                                    <th>Contact Info</th>
+                                    <th>Property</th>
+                                    <th>Message</th>
+                                    <th>Pipeline Stage</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody id="crm-enq-table"></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CONFIGURATION TAB -->
+            <div id="crm-tab-config" class="crm-view-section" style="display: none;">
+                <div class="crm-panel-card">
+                    <div class="card-header">
+                        <h3>Website Branding & Contact Details</h3>
+                    </div>
+                    <form onsubmit="saveCrmConfig(event)" style="max-width: 600px;">
+                        <div class="form-group" style="margin-bottom: 12px;">
+                            <label>Business Name</label>
+                            <input type="text" id="cfg-name" class="form-control" required>
+                        </div>
+                        <div class="form-group" style="margin-bottom: 12px;">
+                            <label>Tagline</label>
+                            <input type="text" id="cfg-tagline" class="form-control" required>
+                        </div>
+                        <div class="form-group" style="margin-bottom: 12px;">
+                            <label>Display Phone Number</label>
+                            <input type="text" id="cfg-phone" class="form-control" required>
+                        </div>
+                        <div class="form-group" style="margin-bottom: 12px;">
+                            <label>Raw Phone (Numbers only for tel: links)</label>
+                            <input type="text" id="cfg-phone-raw" class="form-control" required>
+                        </div>
+                        <div class="form-group" style="margin-bottom: 12px;">
+                            <label>Display WhatsApp Number</label>
+                            <input type="text" id="cfg-whatsapp" class="form-control" required>
+                        </div>
+                        <div class="form-group" style="margin-bottom: 12px;">
+                            <label>Raw WhatsApp Number (Country code + digits)</label>
+                            <input type="text" id="cfg-whatsapp-raw" class="form-control" required>
+                        </div>
+                        <div class="form-group" style="margin-bottom: 12px;">
+                            <label>Email Address</label>
+                            <input type="email" id="cfg-email" class="form-control" required>
+                        </div>
+                        <div class="form-group" style="margin-bottom: 18px;">
+                            <label>Office Address</label>
+                            <input type="text" id="cfg-address" class="form-control" required>
+                        </div>
+                        <button type="submit" class="btn btn-accent"><i class="fas fa-save"></i> Save Website Configuration</button>
+                    </form>
                 </div>
             </div>
 
         </main>
     </div>
 
-    <!-- Modal to Add New Property -->
-    <div id="add-prop-modal" class="modal-overlay">
+    <!-- MODAL FOR ADD / EDIT PROPERTY -->
+    <div id="crm-prop-modal" class="modal-overlay">
         <div class="modal-container">
             <button class="modal-close" onclick="closeModal()">&times;</button>
             <div class="modal-body">
-                <h2>Add New Property Listing</h2>
-                <form onsubmit="addNewPropertyAdmin(event)" style="margin-top: 15px;">
-                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px;">
+                <h2 id="prop-modal-title">Property Form</h2>
+                <form id="prop-form" onsubmit="savePropertyCrm(event)" style="margin-top: 15px;">
+                    <input type="hidden" id="prop-edit-id">
+                    
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px;">
                         <div class="form-group">
                             <label>Property Title *</label>
-                            <input type="text" id="add-title" class="form-control" required placeholder="e.g. 3 BHK Luxury Flat">
+                            <input type="text" id="prop-title" class="form-control" required>
                         </div>
                         <div class="form-group">
-                            <label>Type *</label>
-                            <select id="add-type" class="form-control" required>
-                                <option value="Flat">Flat</option>
-                                <option value="Plot">Plot</option>
-                                <option value="Villa">Villa</option>
-                                <option value="Commercial">Commercial</option>
+                            <label>Property Type *</label>
+                            <select id="prop-type" class="form-control" required>
+                                <option value="Flat">Flat / Apartment</option>
+                                <option value="Plot">Residential Plot</option>
+                                <option value="Villa">Luxury Villa</option>
                             </select>
                         </div>
                         <div class="form-group">
                             <label>Location *</label>
-                            <input type="text" id="add-location" class="form-control" required placeholder="Sector 54, Gurugram">
+                            <input type="text" id="prop-location" class="form-control" required>
                         </div>
                         <div class="form-group">
-                            <label>Formatted Price *</label>
-                            <input type="text" id="add-price" class="form-control" required placeholder="₹ 1.85 Cr">
+                            <label>Formatted Price (e.g. ₹ 1.85 Cr) *</label>
+                            <input type="text" id="prop-price" class="form-control" required>
                         </div>
                         <div class="form-group">
-                            <label>Numeric Price (For filter) *</label>
-                            <input type="number" id="add-num-price" class="form-control" required placeholder="18500000">
+                            <label>Numeric Price (for filter calculation) *</label>
+                            <input type="number" id="prop-num-price" class="form-control" required>
                         </div>
                         <div class="form-group">
                             <label>Area Size *</label>
-                            <input type="text" id="add-area" class="form-control" required placeholder="1850 Sq.Ft.">
+                            <input type="text" id="prop-area" class="form-control" required>
                         </div>
                         <div class="form-group">
                             <label>Bedrooms</label>
-                            <input type="number" id="add-beds" class="form-control" value="3">
+                            <input type="number" id="prop-beds" class="form-control" value="3">
                         </div>
                         <div class="form-group">
                             <label>Bathrooms</label>
-                            <input type="number" id="add-baths" class="form-control" value="3">
+                            <input type="number" id="prop-baths" class="form-control" value="3">
+                        </div>
+                        <div class="form-group">
+                            <label>Badge Tag</label>
+                            <select id="prop-badge" class="form-control">
+                                <option value="Featured">Featured</option>
+                                <option value="Hot Deal">Hot Deal</option>
+                                <option value="New Launch">New Launch</option>
+                            </select>
                         </div>
                     </div>
-                    <div class="form-group" style="margin-top: 15px;">
+
+                    <div class="form-group" style="margin-top: 12px;">
                         <label>Image URL</label>
-                        <input type="url" id="add-image" class="form-control" placeholder="https://images.unsplash.com/...">
+                        <input type="url" id="prop-image" class="form-control" placeholder="https://images.unsplash.com/...">
                     </div>
-                    <div class="form-group" style="margin-top: 15px;">
+
+                    <div class="form-group" style="margin-top: 12px;">
                         <label>Description</label>
-                        <textarea id="add-desc" class="form-control" rows="3" required></textarea>
+                        <textarea id="prop-desc" class="form-control" rows="3" required></textarea>
                     </div>
-                    <button type="submit" class="btn btn-primary" style="margin-top: 20px; width:100%;">Save & Publish Listing</button>
+
+                    <button type="submit" class="btn btn-primary" style="margin-top: 18px; width:100%;">Save Property Listing</button>
                 </form>
             </div>
         </div>
     </div>
 
-    <!-- Application Script -->
     <script src="app.js"></script>
 </body>
 </html>
