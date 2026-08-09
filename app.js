@@ -1,200 +1,154 @@
 /* ==========================================================================
-   REAL ESTATE MASTER JAVASCRIPT ENGINE
+   SHREE SHYAM PROPERTY — ENGINE & CRM CORE
    ========================================================================== */
 
-// 1. BRANDING & CONFIGURATION
-const CONFIG = {
-    businessName: "ROYAL ACRES",
-    tagline: "Find Your Perfect Property",
-    phone: "+91 98765 43210",
-    phoneRaw: "919876543210",
-    whatsapp: "+91 98765 43210",
-    whatsappRaw: "919876543210",
-    email: "info@royalacres.in",
-    address: "Golf Course Road, Sector 54, Gurugram, Haryana, India",
-    instagram: "https://instagram.com",
-    facebook: "https://facebook.com",
-    mapsUrl: "https://maps.google.com/?q=Gurugram",
-    // Endpoint for Formspree / Web3Forms / Custom Backend API:
-    contactApiEndpoint: "https://formspree.io/f/demo_id"
+// 1. DEFAULT BRANDING & CONFIGURATION
+const DEFAULT_CONFIG = {
+    businessName: "SHREE SHYAM PROPERTY",
+    tagline: "Your Trusted Property Partner in Haryana",
+    phone: "+91 98120 00000",
+    phoneRaw: "919812000000",
+    whatsapp: "+91 98120 00000",
+    whatsappRaw: "919812000000",
+    email: "info@shreeshyamproperty.com",
+    address: "Julana, Jind & Gurugram, Haryana, India",
+    mapsUrl: "https://maps.google.com/?q=Gurugram"
 };
 
-// 2. DEMO SEED DATA
+// 2. INITIAL REAL ESTATE DEMO DATA
 const INITIAL_PROPERTIES = [
     {
         id: "PROP-101",
-        title: "Luxury 3 BHK Golf View Apartment",
+        title: "Luxury 3 BHK Golf Course Flat",
         type: "Flat",
         location: "Golf Course Road, Gurugram",
-        price: "₹ 2.45 Cr",
-        numericPrice: 24500000,
-        beds: 3,
-        baths: 3,
-        area: "2100 Sq.Ft.",
-        badge: "Featured",
-        status: "Available",
-        description: "Ultra-luxury modern apartment with panoramic golf course views, high-end Italian marble flooring, and modular kitchen.",
+        price: "₹ 1.85 Cr",
+        numericPrice: 18500000,
+        beds: 3, baths: 3, area: "1850 Sq.Ft.",
+        badge: "Hot Deal", status: "Available",
+        description: "Premium 3 BHK apartment with modern modular kitchen, luxury marble floor, and private balcony view.",
         image: "https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?auto=format&fit=crop&w=800&q=80",
-        builder: "DLF Limited",
-        rera: "GGM/304/2019/36",
-        facing: "North-East",
-        possession: "Ready to Move"
+        builder: "Shree Shyam Projects", rera: "HR-RERA-2024-89", facing: "East", possession: "Ready to Move"
     },
     {
         id: "PROP-102",
-        title: "Premium Residential Plot in Gated Community",
+        title: "Prime Highway Commercial Plot",
         type: "Plot",
         location: "Sector 88, Gurugram",
-        price: "₹ 1.20 Cr",
-        numericPrice: 12000000,
-        beds: 0,
-        baths: 0,
-        area: "250 Sq.Yds",
-        badge: "Hot Deal",
-        status: "Available",
-        description: "East-facing residential plot in a prime gated township with wide roads, underground utilities, and 24/7 security.",
+        price: "₹ 95 Lakhs",
+        numericPrice: 9500000,
+        beds: 0, baths: 0, area: "200 Sq.Yds",
+        badge: "Featured", status: "Available",
+        description: "Commercial plot located directly on 60m wide road, excellent potential for shops or office building.",
         image: "https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=800&q=80",
-        builder: "Vatika Group",
-        rera: "GGM/112/2018/10",
-        facing: "East",
-        possession: "Immediate"
+        builder: "Ahlawat Developers", rera: "HR-RERA-2023-12", facing: "North-East", possession: "Immediate"
     },
     {
         id: "PROP-103",
-        title: "4 BHK Ultra-Luxury Independent Villa",
+        title: "4 BHK Ultra Modern Independent Villa",
         type: "Villa",
         location: "Sohna Road, Gurugram",
-        price: "₹ 4.80 Cr",
-        numericPrice: 48000000,
-        beds: 4,
-        baths: 5,
-        area: "3800 Sq.Ft.",
-        badge: "New Launch",
-        status: "Available",
-        description: "Independent luxury villa featuring a private swimming pool, private terrace garden, and home automation systems.",
+        price: "₹ 3.25 Cr",
+        numericPrice: 32500000,
+        beds: 4, baths: 4, area: "3100 Sq.Ft.",
+        badge: "New Launch", status: "Available",
+        description: "Gated community luxury villa with private garden, terrace lounge, and 24/7 security guard setup.",
         image: "https://images.unsplash.com/photo-1613977257363-707ba9348227?auto=format&fit=crop&w=800&q=80",
-        builder: "Emaar India",
-        rera: "GGM/412/2021/55",
-        facing: "North",
-        possession: "Dec 2026"
-    },
-    {
-        id: "PROP-104",
-        title: "Grade-A Commercial Office Space",
-        type: "Commercial",
-        location: "Cyber City, Gurugram",
-        price: "₹ 3.10 Cr",
-        numericPrice: 31000000,
-        beds: 0,
-        baths: 2,
-        area: "1500 Sq.Ft.",
-        badge: "Featured",
-        status: "Available",
-        description: "Fully furnished commercial office space with high rental yield capability in the heart of the corporate hub.",
-        image: "https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=800&q=80",
-        builder: "M3M India",
-        rera: "GGM/221/2020/12",
-        facing: "West",
-        possession: "Ready to Move"
+        builder: "Royal Acres", rera: "HR-RERA-2025-04", facing: "North", possession: "Dec 2026"
     }
 ];
 
 const INITIAL_PROJECTS = [
     {
         id: "PROJ-201",
-        name: "Imperial Sky Heights",
-        builder: "Emaar India",
+        name: "Shree Shyam Heights",
+        builder: "Shree Shyam Group",
         location: "Sector 62, Gurugram",
-        startingPrice: "₹ 1.85 Cr",
-        configs: "2, 3 & 4 BHK Apartments",
+        startingPrice: "₹ 1.25 Cr",
+        configs: "2 & 3 BHK Luxury Apartments",
         possession: "Dec 2026",
-        rera: "GGM/602/2022/88",
+        rera: "HR-RERA-2024-99",
         image: "https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?auto=format&fit=crop&w=800&q=80"
-    },
-    {
-        id: "PROJ-202",
-        name: "Grand Central Commercial Hub",
-        builder: "M3M India",
-        location: "Golf Course Ext. Road, Gurugram",
-        startingPrice: "₹ 85 Lakhs",
-        configs: "Retail Shops & Office Suites",
-        possession: "Ready to Move",
-        rera: "GGM/511/2021/04",
-        image: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=800&q=80"
     }
 ];
 
-// 3. DECOUPLED DATA ACCESS LAYER (LocalStorage / API Ready)
+// 3. STORAGE LAYER (LOCALSTORAGE / BACKEND API ADAPTER)
 const DataStore = {
+    getConfig: () => {
+        const data = localStorage.getItem('ssp_config');
+        return data ? JSON.parse(data) : DEFAULT_CONFIG;
+    },
+    saveConfig: (cfg) => {
+        localStorage.setItem('ssp_config', JSON.stringify(cfg));
+    },
     getProperties: () => {
-        const data = localStorage.getItem('re_properties');
+        const data = localStorage.getItem('ssp_properties');
         return data ? JSON.parse(data) : INITIAL_PROPERTIES;
     },
-    saveProperties: (properties) => {
-        localStorage.setItem('re_properties', JSON.stringify(properties));
+    saveProperties: (props) => {
+        localStorage.setItem('ssp_properties', JSON.stringify(props));
     },
     getProjects: () => {
-        const data = localStorage.getItem('re_projects');
+        const data = localStorage.getItem('ssp_projects');
         return data ? JSON.parse(data) : INITIAL_PROJECTS;
     },
-    saveProjects: (projects) => {
-        localStorage.setItem('re_projects', JSON.stringify(projects));
+    saveProjects: (projs) => {
+        localStorage.setItem('ssp_projects', JSON.stringify(projs));
     },
     getEnquiries: () => {
-        const data = localStorage.getItem('re_enquiries');
+        const data = localStorage.getItem('ssp_enquiries');
         return data ? JSON.parse(data) : [];
     },
-    addEnquiry: (enquiry) => {
-        const enquiries = DataStore.getEnquiries();
-        enquiries.unshift({ ...enquiry, id: 'ENQ-' + Date.now(), date: new Date().toLocaleDateString(), status: 'New' });
-        localStorage.setItem('re_enquiries', JSON.stringify(enquiries));
+    addEnquiry: (enq) => {
+        const list = DataStore.getEnquiries();
+        list.unshift({ ...enq, id: 'LEAD-' + Date.now(), date: new Date().toLocaleDateString(), status: 'New' });
+        localStorage.setItem('ssp_enquiries', JSON.stringify(list));
     },
     updateEnquiryStatus: (id, status) => {
-        const enquiries = DataStore.getEnquiries();
-        const index = enquiries.findIndex(e => e.id === id);
+        const list = DataStore.getEnquiries();
+        const index = list.findIndex(e => e.id === id);
         if (index !== -1) {
-            enquiries[index].status = status;
-            localStorage.setItem('re_enquiries', JSON.stringify(enquiries));
+            list[index].status = status;
+            localStorage.setItem('ssp_enquiries', JSON.stringify(list));
         }
     },
     deleteEnquiry: (id) => {
-        const enquiries = DataStore.getEnquiries().filter(e => e.id !== id);
-        localStorage.setItem('re_enquiries', JSON.stringify(enquiries));
+        const list = DataStore.getEnquiries().filter(e => e.id !== id);
+        localStorage.setItem('ssp_enquiries', JSON.stringify(list));
     }
 };
 
-// 4. UI INITIALIZATION & DOM BINDING
+// 4. INITIALIZATION
 document.addEventListener('DOMContentLoaded', () => {
     applyBranding();
     initMobileNav();
-    
-    // Check if on public index page or admin page
+
     if (document.getElementById('property-grid')) {
         renderProperties(DataStore.getProperties());
         renderProjects(DataStore.getProjects());
-        initSearchAndFilters();
+        initSearchFilters();
         initContactForm();
-    } else if (document.getElementById('admin-stats')) {
-        initAdminDashboard();
+    } else if (document.getElementById('crm-dashboard-view')) {
+        initCRM();
     }
 });
 
 function applyBranding() {
-    // Populate dynamic text from CONFIG
-    document.querySelectorAll('[data-brand="name"]').forEach(el => el.textContent = CONFIG.businessName);
-    document.querySelectorAll('[data-brand="tagline"]').forEach(el => el.textContent = CONFIG.tagline);
+    const config = DataStore.getConfig();
+    document.querySelectorAll('[data-brand="name"]').forEach(el => el.textContent = config.businessName);
+    document.querySelectorAll('[data-brand="tagline"]').forEach(el => el.textContent = config.tagline);
     document.querySelectorAll('[data-brand="phone"]').forEach(el => {
-        el.textContent = CONFIG.phone;
-        if (el.tagName === 'A') el.href = `tel:${CONFIG.phoneRaw}`;
+        el.textContent = config.phone;
+        if (el.tagName === 'A') el.href = `tel:${config.phoneRaw}`;
     });
     document.querySelectorAll('[data-brand="whatsapp"]').forEach(el => {
-        if (el.tagName === 'A') el.href = `https://wa.me/${CONFIG.whatsappRaw}`;
+        if (el.tagName === 'A') el.href = `https://wa.me/${config.whatsappRaw}`;
     });
     document.querySelectorAll('[data-brand="email"]').forEach(el => {
-        el.textContent = CONFIG.email;
-        if (el.tagName === 'A') el.href = `mailto:${CONFIG.email}`;
+        el.textContent = config.email;
+        if (el.tagName === 'A') el.href = `mailto:${config.email}`;
     });
-    document.querySelectorAll('[data-brand="address"]').forEach(el => el.textContent = CONFIG.address);
+    document.querySelectorAll('[data-brand="address"]').forEach(el => el.textContent = config.address);
 }
 
 function initMobileNav() {
@@ -205,31 +159,32 @@ function initMobileNav() {
     }
 }
 
-// 5. RENDER PROPERTY CARDS
+// 5. PUBLIC WEBSITE RENDERERS
 function renderProperties(properties) {
     const grid = document.getElementById('property-grid');
     const countEl = document.getElementById('property-count');
     if (!grid) return;
 
     grid.innerHTML = '';
-    if (countEl) countEl.textContent = `${properties.length} Properties Found`;
+    if (countEl) countEl.textContent = `${properties.length} Properties Available`;
 
     if (properties.length === 0) {
-        grid.innerHTML = `<div style="grid-column: 1/-1; text-align: center; padding: 40px;">
+        grid.innerHTML = `<div style="grid-column: 1/-1; text-align: center; padding: 50px;">
             <h3>No Properties Found</h3>
-            <p style="color: var(--text-muted)">Try loosening your search filters.</p>
+            <p style="color: var(--text-muted)">Try adjusting your search filters.</p>
         </div>`;
         return;
     }
 
+    const config = DataStore.getConfig();
     properties.forEach(prop => {
-        const waMsg = encodeURIComponent(`Hi, I am interested in ${prop.title} (${prop.id}). Please share more details.`);
+        const waMsg = encodeURIComponent(`Hi ${config.businessName}, I am interested in ${prop.title} (${prop.id}). Please share details.`);
         const card = document.createElement('div');
         card.className = 'property-card';
         card.innerHTML = `
             <div class="card-image-wrap">
                 <img src="${prop.image}" alt="${prop.title}" loading="lazy">
-                <span class="card-badge ${prop.badge === 'Hot Deal' ? 'badge-hot' : 'badge-new'}">${prop.badge}</span>
+                <span class="card-badge ${prop.badge === 'Hot Deal' ? 'badge-hot' : 'badge-gold'}">${prop.badge}</span>
             </div>
             <div class="card-body">
                 <div class="card-price">${prop.price}</div>
@@ -241,9 +196,9 @@ function renderProperties(properties) {
                     <span><i class="fas fa-ruler-combined"></i> ${prop.area}</span>
                 </div>
                 <div class="card-actions">
-                    <button class="btn btn-primary" style="flex-grow: 1;" onclick="openPropertyModal('${prop.id}')">View Details</button>
-                    <a href="https://wa.me/${CONFIG.whatsappRaw}?text=${waMsg}" target="_blank" class="btn btn-whatsapp"><i class="fab fa-whatsapp"></i></a>
-                    <a href="tel:${CONFIG.phoneRaw}" class="btn btn-outline"><i class="fas fa-phone"></i></a>
+                    <button class="btn btn-primary" style="flex-grow: 1;" onclick="openPropertyModal('${prop.id}')">Details</button>
+                    <a href="https://wa.me/${config.whatsappRaw}?text=${waMsg}" target="_blank" class="btn btn-whatsapp"><i class="fab fa-whatsapp"></i></a>
+                    <a href="tel:${config.phoneRaw}" class="btn btn-outline"><i class="fas fa-phone"></i></a>
                 </div>
             </div>
         `;
@@ -251,7 +206,6 @@ function renderProperties(properties) {
     });
 }
 
-// 6. RENDER BUILDER PROJECTS
 function renderProjects(projects) {
     const grid = document.getElementById('project-grid');
     if (!grid) return;
@@ -259,35 +213,46 @@ function renderProjects(projects) {
 
     projects.forEach(proj => {
         const card = document.createElement('div');
-        card.className = 'project-card property-card';
+        card.className = 'property-card';
         card.innerHTML = `
             <div class="card-image-wrap">
                 <img src="${proj.image}" alt="${proj.name}" loading="lazy">
-                <span class="card-badge">${proj.builder}</span>
+                <span class="card-badge badge-gold">${proj.builder}</span>
             </div>
             <div class="card-body">
                 <div class="card-price">Starting ${proj.startingPrice}</div>
                 <h3 class="card-title">${proj.name}</h3>
                 <div class="card-location"><i class="fas fa-map-marker-alt"></i> ${proj.location}</div>
                 <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 15px;">
-                    Config: ${proj.configs} <br>
+                    Configuration: ${proj.configs} <br>
                     Possession: ${proj.possession}
                 </p>
-                <button class="btn btn-accent" style="width: 100%;" onclick="openContactModalForProject('${proj.name}')">Enquire Project</button>
+                <button class="btn btn-accent" style="width: 100%;" onclick="openContactModalForProject('${proj.name}')">Enquire Now</button>
             </div>
         `;
         grid.appendChild(card);
     });
 }
 
-// 7. PROPERTY FILTERING SYSTEM
-function initSearchAndFilters() {
+// 6. SEARCH & FILTERS
+function initSearchFilters() {
     const filterForm = document.getElementById('search-filter-form');
     if (!filterForm) return;
 
     filterForm.addEventListener('submit', (e) => {
         e.preventDefault();
-        applyFilters();
+        const type = document.getElementById('filter-type')?.value;
+        const location = document.getElementById('filter-location')?.value.toLowerCase();
+        const maxPrice = parseFloat(document.getElementById('filter-price')?.value) || Infinity;
+
+        const filtered = DataStore.getProperties().filter(p => {
+            const matchType = !type || p.type === type;
+            const matchLoc = !location || p.location.toLowerCase().includes(location);
+            const matchPrice = p.numericPrice <= maxPrice;
+            return matchType && matchLoc && matchPrice;
+        });
+
+        renderProperties(filtered);
     });
 
     document.getElementById('btn-reset-filter')?.addEventListener('click', () => {
@@ -296,59 +261,45 @@ function initSearchAndFilters() {
     });
 }
 
-function applyFilters() {
-    const type = document.getElementById('filter-type')?.value;
-    const location = document.getElementById('filter-location')?.value.toLowerCase();
-    const maxPrice = parseFloat(document.getElementById('filter-price')?.value) || Infinity;
-
-    const filtered = DataStore.getProperties().filter(p => {
-        const matchType = !type || p.type === type;
-        const matchLoc = !location || p.location.toLowerCase().includes(location);
-        const matchPrice = p.numericPrice <= maxPrice;
-        return matchType && matchLoc && matchPrice;
-    });
-
-    renderProperties(filtered);
-}
-
 function filterByCategory(typeCategory) {
     const filtered = DataStore.getProperties().filter(p => p.type === typeCategory);
     renderProperties(filtered);
-    document.getElementById('properties').scrollIntoView({ behavior: 'smooth' });
+    document.getElementById('properties')?.scrollIntoView({ behavior: 'smooth' });
 }
 
-// 8. PROPERTY DETAILS MODAL
+// 7. MODALS & CONTACT FORM
 function openPropertyModal(id) {
     const prop = DataStore.getProperties().find(p => p.id === id);
     if (!prop) return;
 
     const modal = document.getElementById('property-modal');
     const modalBody = document.getElementById('modal-dynamic-content');
-    const waMsg = encodeURIComponent(`Hi, I am interested in ${prop.title} (${prop.id}). Please share visit details.`);
+    const config = DataStore.getConfig();
+    const waMsg = encodeURIComponent(`Hi ${config.businessName}, I would like to schedule a site visit for ${prop.title} (${prop.id}).`);
 
     modalBody.innerHTML = `
-        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 25px;">
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px;">
             <div>
-                <img src="${prop.image}" alt="${prop.title}" style="width: 100%; border-radius: var(--radius);">
+                <img src="${prop.image}" alt="${prop.title}" style="width: 100%; border-radius: var(--radius); object-fit: cover; max-height: 320px;">
             </div>
             <div>
-                <span class="card-badge">${prop.status}</span>
+                <span class="card-badge badge-gold">${prop.status}</span>
                 <h2 style="margin-top: 10px;">${prop.title}</h2>
                 <p style="color: var(--text-muted);"><i class="fas fa-map-marker-alt"></i> ${prop.location}</p>
-                <h3 style="color: var(--accent); margin: 15px 0;">${prop.price}</h3>
+                <h3 style="color: var(--accent); margin: 12px 0;">${prop.price}</h3>
                 
-                <table style="width: 100%; font-size: 0.9rem; margin-bottom: 20px;">
+                <table style="width: 100%; font-size: 0.88rem; margin-bottom: 20px;">
                     <tr><td><strong>Type:</strong> ${prop.type}</td><td><strong>Area:</strong> ${prop.area}</td></tr>
-                    <tr><td><strong>Bedrooms:</strong> ${prop.beds}</td><td><strong>Bathrooms:</strong> ${prop.baths}</td></tr>
+                    <tr><td><strong>Beds:</strong> ${prop.beds}</td><td><strong>Baths:</strong> ${prop.baths}</td></tr>
                     <tr><td><strong>Facing:</strong> ${prop.facing}</td><td><strong>Possession:</strong> ${prop.possession}</td></tr>
-                    <tr><td><strong>Builder:</strong> ${prop.builder}</td><td><strong>RERA:</strong> ${prop.rera}</td></tr>
+                    <tr><td><strong>RERA:</strong> ${prop.rera}</td><td><strong>Builder:</strong> ${prop.builder}</td></tr>
                 </table>
 
-                <p style="font-size: 0.9rem; margin-bottom: 20px;">${prop.description}</p>
+                <p style="font-size: 0.9rem; margin-bottom: 20px; color: var(--text-dark);">${prop.description}</p>
 
-                <div style="display: flex; gap: 10px; flex-wrap: wrap;">
-                    <a href="https://wa.me/${CONFIG.whatsappRaw}?text=${waMsg}" target="_blank" class="btn btn-whatsapp" style="flex-grow:1;"><i class="fab fa-whatsapp"></i> WhatsApp Enquiry</a>
-                    <a href="tel:${CONFIG.phoneRaw}" class="btn btn-primary" style="flex-grow:1;"><i class="fas fa-phone"></i> Call Now</a>
+                <div style="display: flex; gap: 10px;">
+                    <a href="https://wa.me/${config.whatsappRaw}?text=${waMsg}" target="_blank" class="btn btn-whatsapp" style="flex-grow:1;"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+                    <a href="tel:${config.phoneRaw}" class="btn btn-primary" style="flex-grow:1;"><i class="fas fa-phone"></i> Call Direct</a>
                 </div>
             </div>
         </div>
@@ -361,7 +312,6 @@ function closeModal() {
     document.querySelectorAll('.modal-overlay').forEach(m => m.classList.remove('active'));
 }
 
-// 9. PUBLIC CONTACT & ENQUIRY FORM
 function initContactForm() {
     const form = document.getElementById('contact-form');
     if (!form) return;
@@ -377,20 +327,7 @@ function initContactForm() {
             message: document.getElementById('enq-message').value
         };
 
-        // Save locally for demo admin portal
         DataStore.addEnquiry(enquiry);
-
-        /* ==================================================================
-           FUTURE BACKEND API INTEGRATION POINT:
-           Uncomment the fetch below to send data to Formspree, Web3Forms, or PHP backend.
-           ------------------------------------------------------------------
-           fetch(CONFIG.contactApiEndpoint, {
-               method: 'POST',
-               headers: { 'Content-Type': 'application/json' },
-               body: JSON.stringify(enquiry)
-           });
-           ================================================================== */
-
         alert('Thank you! Your enquiry has been received. Our team will contact you shortly.');
         form.reset();
     });
@@ -399,102 +336,170 @@ function initContactForm() {
 function openContactModalForProject(projectName) {
     const propInput = document.getElementById('enq-property');
     if (propInput) propInput.value = `Project: ${projectName}`;
-    document.getElementById('contact').scrollIntoView({ behavior: 'smooth' });
+    document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
 }
 
-// 10. ADMIN DASHBOARD LOGIC
-function initAdminDashboard() {
-    // Check Demo Auth
-    if (sessionStorage.getItem('re_admin_logged') !== 'true') {
-        const pass = prompt('Admin Login (Demo Password: admin123):');
-        if (pass === 'admin123') {
-            sessionStorage.setItem('re_admin_logged', 'true');
-        } else {
-            alert('Unauthorized');
-            window.location.href = 'index.html';
-            return;
-        }
+// ==========================================================================
+// 8. CRM DASHBOARD & AUTHENTICATION (USERNAME: admin / PASSWORD: shyam)
+// ==========================================================================
+
+function handleCrmLogin(event) {
+    event.preventDefault();
+    const user = document.getElementById('crm-user').value;
+    const pass = document.getElementById('crm-pass').value;
+
+    if (user === 'admin' && pass === 'shyam') {
+        sessionStorage.setItem('ssp_admin_logged', 'true');
+        document.getElementById('crm-auth-screen').style.display = 'none';
+        document.getElementById('crm-app-screen').style.display = 'flex';
+        initCRM();
+    } else {
+        alert('Invalid Credentials! Hint: Username=admin, Password=shyam');
+    }
+}
+
+function handleCrmLogout() {
+    sessionStorage.removeItem('ssp_admin_logged');
+    window.location.reload();
+}
+
+function initCRM() {
+    const isLogged = sessionStorage.getItem('ssp_admin_logged') === 'true';
+    const authScreen = document.getElementById('crm-auth-screen');
+    const appScreen = document.getElementById('crm-app-screen');
+
+    if (!isLogged) {
+        if (authScreen) authScreen.style.display = 'flex';
+        if (appScreen) appScreen.style.display = 'none';
+        return;
     }
 
-    renderAdminStats();
-    renderAdminProperties();
-    renderAdminEnquiries();
+    if (authScreen) authScreen.style.display = 'none';
+    if (appScreen) appScreen.style.display = 'flex';
+
+    renderCrmStats();
+    renderCrmProperties();
+    renderCrmEnquiries();
+    renderCrmConfigForm();
 }
 
-function renderAdminStats() {
+function switchCrmTab(tabName, element) {
+    document.querySelectorAll('.crm-menu a').forEach(a => a.classList.remove('active'));
+    if (element) element.classList.add('active');
+
+    document.querySelectorAll('.crm-view-section').forEach(sec => sec.style.display = 'none');
+    document.getElementById(`crm-tab-${tabName}`).style.display = 'block';
+}
+
+function renderCrmStats() {
     const props = DataStore.getProperties();
     const enqs = DataStore.getEnquiries();
     const projs = DataStore.getProjects();
 
-    document.getElementById('stat-total-props').textContent = props.length;
-    document.getElementById('stat-total-enqs').textContent = enqs.length;
-    document.getElementById('stat-total-projs').textContent = projs.length;
+    document.getElementById('stat-props-count').textContent = props.length;
+    document.getElementById('stat-enqs-count').textContent = enqs.length;
+    document.getElementById('stat-projs-count').textContent = projs.length;
 }
 
-function renderAdminProperties() {
-    const tbody = document.getElementById('admin-props-tbody');
+function renderCrmProperties() {
+    const tbody = document.getElementById('crm-props-table');
     if (!tbody) return;
     tbody.innerHTML = '';
 
     DataStore.getProperties().forEach(p => {
         const tr = document.createElement('tr');
         tr.innerHTML = `
-            <td>${p.id}</td>
-            <td><strong>${p.title}</strong></td>
+            <td><strong>${p.id}</strong></td>
+            <td>${p.title}</td>
             <td>${p.type}</td>
             <td>${p.price}</td>
             <td>${p.location}</td>
             <td>
-                <button class="btn btn-outline" style="padding: 4px 8px; font-size:0.8rem;" onclick="deletePropertyAdmin('${p.id}')"><i class="fas fa-trash"></i></button>
+                <button class="btn btn-outline btn-sm" onclick="editPropertyModal('${p.id}')"><i class="fas fa-edit"></i> Edit</button>
+                <button class="btn btn-outline btn-sm" style="color:var(--danger);" onclick="deletePropertyCrm('${p.id}')"><i class="fas fa-trash"></i></button>
             </td>
         `;
         tbody.appendChild(tr);
     });
 }
 
-function deletePropertyAdmin(id) {
-    if (confirm(`Are you sure you want to delete property ${id}?`)) {
+function deletePropertyCrm(id) {
+    if (confirm(`Delete property listing ${id}?`)) {
         const updated = DataStore.getProperties().filter(p => p.id !== id);
         DataStore.saveProperties(updated);
-        renderAdminProperties();
-        renderAdminStats();
+        renderCrmProperties();
+        renderCrmStats();
     }
 }
 
-function addNewPropertyAdmin(event) {
-    event.preventDefault();
+function openAddPropertyModal() {
+    document.getElementById('prop-form').reset();
+    document.getElementById('prop-edit-id').value = '';
+    document.getElementById('prop-modal-title').textContent = 'Add New Property';
+    document.getElementById('crm-prop-modal').classList.add('active');
+}
+
+function editPropertyModal(id) {
+    const prop = DataStore.getProperties().find(p => p.id === id);
+    if (!prop) return;
+
+    document.getElementById('prop-edit-id').value = prop.id;
+    document.getElementById('prop-title').value = prop.title;
+    document.getElementById('prop-type').value = prop.type;
+    document.getElementById('prop-location').value = prop.location;
+    document.getElementById('prop-price').value = prop.price;
+    document.getElementById('prop-num-price').value = prop.numericPrice;
+    document.getElementById('prop-area').value = prop.area;
+    document.getElementById('prop-beds').value = prop.beds;
+    document.getElementById('prop-baths').value = prop.baths;
+    document.getElementById('prop-badge').value = prop.badge;
+    document.getElementById('prop-image').value = prop.image;
+    document.getElementById('prop-desc').value = prop.description;
+
+    document.getElementById('prop-modal-title').textContent = `Edit Property (${prop.id})`;
+    document.getElementById('crm-prop-modal').classList.add('active');
+}
+
+function savePropertyCrm(e) {
+    e.preventDefault();
     const props = DataStore.getProperties();
-    
-    const newProp = {
-        id: "PROP-" + Math.floor(100 + Math.random() * 900),
-        title: document.getElementById('add-title').value,
-        type: document.getElementById('add-type').value,
-        location: document.getElementById('add-location').value,
-        price: document.getElementById('add-price').value,
-        numericPrice: parseFloat(document.getElementById('add-num-price').value) || 0,
-        beds: parseInt(document.getElementById('add-beds').value) || 0,
-        baths: parseInt(document.getElementById('add-baths').value) || 0,
-        area: document.getElementById('add-area').value,
-        badge: "New",
+    const editId = document.getElementById('prop-edit-id').value;
+
+    const propData = {
+        id: editId || "PROP-" + Math.floor(100 + Math.random() * 900),
+        title: document.getElementById('prop-title').value,
+        type: document.getElementById('prop-type').value,
+        location: document.getElementById('prop-location').value,
+        price: document.getElementById('prop-price').value,
+        numericPrice: parseFloat(document.getElementById('prop-num-price').value) || 0,
+        area: document.getElementById('prop-area').value,
+        beds: parseInt(document.getElementById('prop-beds').value) || 0,
+        baths: parseInt(document.getElementById('prop-baths').value) || 0,
+        badge: document.getElementById('prop-badge').value,
         status: "Available",
-        description: document.getElementById('add-desc').value,
-        image: document.getElementById('add-image').value || "https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?auto=format&fit=crop&w=800&q=80",
-        builder: "Independent",
-        rera: "N/A",
-        facing: "North",
+        image: document.getElementById('prop-image').value || "https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?auto=format&fit=crop&w=800&q=80",
+        description: document.getElementById('prop-desc').value,
+        builder: "Shree Shyam Property",
+        rera: "HR-RERA-2024",
+        facing: "East",
         possession: "Ready"
     };
 
-    props.unshift(newProp);
+    if (editId) {
+        const idx = props.findIndex(p => p.id === editId);
+        if (idx !== -1) props[idx] = propData;
+    } else {
+        props.unshift(propData);
+    }
+
     DataStore.saveProperties(props);
-    alert('Property Added Successfully!');
     closeModal();
-    renderAdminProperties();
-    renderAdminStats();
+    renderCrmProperties();
+    renderCrmStats();
 }
 
-function renderAdminEnquiries() {
-    const tbody = document.getElementById('admin-enq-tbody');
+function renderCrmEnquiries() {
+    const tbody = document.getElementById('crm-enq-table');
     if (!tbody) return;
     tbody.innerHTML = '';
 
@@ -503,24 +508,64 @@ function renderAdminEnquiries() {
         tr.innerHTML = `
             <td>${e.date}</td>
             <td><strong>${e.name}</strong></td>
-            <td>${e.phone}<br><small>${e.email}</small></td>
-            <td>${e.property || 'General'}</td>
+            <td>${e.phone}<br><small style="color:var(--text-muted)">${e.email}</small></td>
+            <td>${e.property || 'General Inquiry'}</td>
             <td>${e.message}</td>
             <td>
-                <span class="card-badge">${e.status}</span>
+                <select class="form-control" style="padding:4px 8px; font-size:0.8rem;" onchange="updateLeadStatus('${e.id}', this.value)">
+                    <option value="New" ${e.status === 'New' ? 'selected' : ''}>New Lead</option>
+                    <option value="Contacted" ${e.status === 'Contacted' ? 'selected' : ''}>Contacted</option>
+                    <option value="Closed" ${e.status === 'Closed' ? 'selected' : ''}>Site Visit / Closed</option>
+                </select>
             </td>
             <td>
-                <button class="btn btn-outline" style="padding: 4px 8px; font-size:0.8rem;" onclick="deleteEnquiryAdmin('${e.id}')"><i class="fas fa-trash"></i></button>
+                <button class="btn btn-outline btn-sm" style="color:var(--danger)" onclick="deleteLeadCrm('${e.id}')"><i class="fas fa-trash"></i></button>
             </td>
         `;
         tbody.appendChild(tr);
     });
 }
 
-function deleteEnquiryAdmin(id) {
-    if (confirm('Delete this enquiry?')) {
+function updateLeadStatus(id, status) {
+    DataStore.updateEnquiryStatus(id, status);
+}
+
+function deleteLeadCrm(id) {
+    if (confirm('Delete lead record?')) {
         DataStore.deleteEnquiry(id);
-        renderAdminEnquiries();
-        renderAdminStats();
+        renderCrmEnquiries();
+        renderCrmStats();
     }
+}
+
+function renderCrmConfigForm() {
+    const cfg = DataStore.getConfig();
+    if (!document.getElementById('cfg-name')) return;
+
+    document.getElementById('cfg-name').value = cfg.businessName;
+    document.getElementById('cfg-tagline').value = cfg.tagline;
+    document.getElementById('cfg-phone').value = cfg.phone;
+    document.getElementById('cfg-phone-raw').value = cfg.phoneRaw;
+    document.getElementById('cfg-whatsapp').value = cfg.whatsapp;
+    document.getElementById('cfg-whatsapp-raw').value = cfg.whatsappRaw;
+    document.getElementById('cfg-email').value = cfg.email;
+    document.getElementById('cfg-address').value = cfg.address;
+}
+
+function saveCrmConfig(e) {
+    e.preventDefault();
+    const cfg = {
+        businessName: document.getElementById('cfg-name').value,
+        tagline: document.getElementById('cfg-tagline').value,
+        phone: document.getElementById('cfg-phone').value,
+        phoneRaw: document.getElementById('cfg-phone-raw').value,
+        whatsapp: document.getElementById('cfg-whatsapp').value,
+        whatsappRaw: document.getElementById('cfg-whatsapp-raw').value,
+        email: document.getElementById('cfg-email').value,
+        address: document.getElementById('cfg-address').value
+    };
+
+    DataStore.saveConfig(cfg);
+    applyBranding();
+    alert('Website Configuration Saved Successfully!');
 }
