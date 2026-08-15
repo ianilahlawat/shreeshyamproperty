@@ -1,0 +1,97 @@
+{
+  "siteName": "Shri Syam Builder & Property",
+  "tagline": "Dehradun Ki Zameen, Bharose Ka Naam",
+  "taglineEnglish": "Trusted plots, flats & construction across Dehradun",
+  "phone": "+91-7895763576",
+  "whatsapp": "917895763576",
+  "email": "info@shrisyambuilder.com",
+  "address": "Dehradun, Uttarakhand, India",
+  "mapQuery": "Dehradun, Uttarakhand",
+  "adminPassword": "syam@2026",
+  "leadsWebhookUrl": "",
+  "leadsSheetCsvUrl": "",
+  "social": {
+    "facebook": "",
+    "instagram": "",
+    "youtube": ""
+  },
+  "stats": [
+    { "label": "Years in Dehradun", "value": "12+" },
+    { "label": "Properties Handled", "value": "300+" },
+    { "label": "Happy Families", "value": "250+" },
+    { "label": "Active Construction Sites", "value": "8" }
+  ],
+  "about": "Shri Syam Builder & Property has been helping families and investors buy, sell and build across Dehradun for over a decade. From residential plots in Sahastradhara and Rajpur Road to ready flats near Clement Town and turnkey construction contracts in the Doon valley — every deal is handled with clear paperwork and straight talk, no games.",
+  "services": [
+    {
+      "icon": "plot",
+      "title": "Plot Sale & Purchase",
+      "description": "Verified residential and agricultural plots across Dehradun with clean title and registry support."
+    },
+    {
+      "icon": "flat",
+      "title": "Flats & Apartments",
+      "description": "Ready-to-move and under-construction flats in prime Dehradun societies, matched to your budget."
+    },
+    {
+      "icon": "home",
+      "title": "Independent Homes",
+      "description": "Buy or sell independent houses and kothis with genuine site visits, no shortcuts."
+    },
+    {
+      "icon": "contract",
+      "title": "Construction Contracts",
+      "description": "Turnkey construction from foundation to finishing — labour, material and design under one contract."
+    }
+  ],
+  "properties": [
+    {
+      "id": "p1",
+      "title": "200 Sq. Yd. Residential Plot",
+      "type": "Plot",
+      "location": "Sahastradhara Road, Dehradun",
+      "price": "₹42,00,000",
+      "area": "200 Sq. Yd.",
+      "status": "For Sale",
+      "featured": true,
+      "image": "",
+      "description": "Corner plot on a wide road, close to main market, clear registry, ready for construction."
+    },
+    {
+      "id": "p2",
+      "title": "3 BHK Ready Flat",
+      "type": "Flat",
+      "location": "Clement Town, Dehradun",
+      "price": "₹58,00,000",
+      "area": "1450 Sq. Ft.",
+      "status": "For Sale",
+      "featured": true,
+      "image": "",
+      "description": "Third floor flat with lift, covered parking and 24x7 water supply in a gated society."
+    },
+    {
+      "id": "p3",
+      "title": "Independent Kothi",
+      "type": "Home",
+      "location": "Rajpur Road, Dehradun",
+      "price": "₹1,25,00,000",
+      "area": "300 Sq. Yd.",
+      "status": "For Sale",
+      "featured": false,
+      "image": "",
+      "description": "Two-storey independent home with garden, servant quarter and covered car porch."
+    },
+    {
+      "id": "p4",
+      "title": "Commercial Plot on Highway",
+      "type": "Plot",
+      "location": "Haridwar Road, Dehradun",
+      "price": "₹85,00,000",
+      "area": "400 Sq. Yd.",
+      "status": "For Sale",
+      "featured": false,
+      "image": "",
+      "description": "Highway-facing commercial plot, ideal for showroom, dhaba or warehouse."
+    }
+  ]
+}
