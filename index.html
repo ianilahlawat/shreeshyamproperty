@@ -3,245 +3,236 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SHREE SHYAM PROPERTY | Premium Real Estate Advisory in Haryana</title>
-    <meta name="description" content="Discover premium flats, plots, residential and commercial properties from trusted builders with Shree Shyam Property.">
-
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <title>Prime Homes & Builders | Real Estate & Construction</title>
     <link rel="stylesheet" href="style.css">
+    <!-- FontAwesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
 
-    <!-- Header -->
-    <header class="site-header">
-        <div class="container header-wrapper">
-            <a href="index.html" class="logo-container">
-                <i class="fas fa-building fa-2x" style="color: var(--accent);"></i>
-                <div class="logo-text brand-font" data-brand="name">SHREE SHYAM PROPERTY</div>
-            </a>
-
-            <nav class="nav-menu">
-                <a href="#home" class="nav-link active">Home</a>
-                <a href="#properties" class="nav-link">Properties</a>
-                <a href="#categories" class="nav-link">Categories</a>
-                <a href="#projects" class="nav-link">Projects</a>
-                <a href="#about" class="nav-link">About</a>
-                <a href="#contact" class="nav-link">Contact</a>
-            </nav>
-
-            <div class="header-actions">
-                <a href="#" data-brand="phone" class="btn btn-outline" style="display: none; @media(min-width:768px){display:inline-flex;}"><i class="fas fa-phone"></i> Call</a>
-                <a href="#" data-brand="whatsapp" target="_blank" class="btn btn-whatsapp"><i class="fab fa-whatsapp"></i> WhatsApp</a>
-                <a href="admin.html" class="btn btn-primary"><i class="fas fa-lock"></i> CRM Login</a>
-                <button class="mobile-toggle"><i class="fas fa-bars"></i></button>
+    <!-- Top Contact Bar -->
+    <div class="top-bar">
+        <div class="container top-bar-content">
+            <div><i class="fa-solid fa-phone"></i> +91 99999 99999 &nbsp;|&nbsp; <i class="fa-solid fa-location-dot"></i> Prime Business Center</div>
+            <div>
+                <a href="#admin" onclick="openAdmin()"><i class="fa-solid fa-lock"></i> Admin Panel</a>
             </div>
+        </div>
+    </div>
+
+    <!-- Navigation Header -->
+    <header class="main-header">
+        <div class="container nav-container">
+            <div class="brand">
+                <h2><span>PRIME</span>HOMES</h2>
+                <small>Properties & Turnkey Construction</small>
+            </div>
+            <nav class="nav-links">
+                <a href="#search-section">Buy Properties</a>
+                <a href="#search-section" onclick="filterByCategory('Plot')">Plots</a>
+                <a href="#search-section" onclick="filterByCategory('Society Flat')">Society Flats</a>
+                <a href="#construction-section">Construction Services</a>
+                <a href="#contact-section" class="btn-nav">Post Property / Contact</a>
+            </nav>
         </div>
     </header>
 
-    <!-- Hero -->
-    <section id="home" class="hero">
+    <!-- Hero & Search Filter Bar (Dwarka Homes Style) -->
+    <section class="hero-section" id="search-section">
         <div class="container">
-            <div class="hero-content">
-                <h1>Find Your Dream Property in Haryana</h1>
-                <p data-brand="tagline">Your Trusted Real Estate Partner for Flats, Plots & Commercial Properties</p>
+            <h1>Find Your Dream Property & Plot Deals</h1>
+            <p>Verified Society Flats, Builder Floors, Commercial & Residential Plots with Turnkey Construction Services</p>
 
-                <div class="search-container">
-                    <form id="search-filter-form">
-                        <div class="search-grid">
-                            <div class="form-group">
-                                <label>Property Type</label>
-                                <select id="filter-type" class="form-control">
-                                    <option value="">All Types</option>
-                                    <option value="Flat">Flat / Apartment</option>
-                                    <option value="Plot">Residential Plot</option>
-                                    <option value="Villa">Luxury Villa</option>
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <label>Location</label>
-                                <input type="text" id="filter-location" class="form-control" placeholder="e.g. Gurugram, Sector 88">
-                            </div>
-                            <div class="form-group">
-                                <label>Max Budget</label>
-                                <select id="filter-price" class="form-control">
-                                    <option value="">Any Price</option>
-                                    <option value="10000000">Up to ₹ 1.0 Cr</option>
-                                    <option value="20000000">Up to ₹ 2.0 Cr</option>
-                                    <option value="50000000">Up to ₹ 5.0 Cr</option>
-                                </select>
-                            </div>
-                            <div class="form-group" style="justify-content: flex-end;">
-                                <button type="submit" class="btn btn-accent" style="height: 42px;"><i class="fas fa-search"></i> Search Properties</button>
-                            </div>
-                        </div>
-                    </form>
+            <div class="search-filter-box">
+                <div class="filter-group">
+                    <label><i class="fa-solid fa-magnifying-glass"></i> Keyword / Society</label>
+                    <input type="text" id="searchKeyword" placeholder="e.g. Sector 6, Gyan Shakti, 150 Gaj..." oninput="filterListings()">
+                </div>
+
+                <div class="filter-group">
+                    <label><i class="fa-solid fa-building"></i> Category</label>
+                    <select id="categorySelect" onchange="filterListings()">
+                        <option value="All">All Categories</option>
+                        <option value="Society Flat">Society Flats</option>
+                        <option value="Plot">Plots / Land</option>
+                        <option value="Builder Floor">Builder Floors</option>
+                        <option value="DDA Flat">DDA Flats</option>
+                    </select>
+                </div>
+
+                <div class="filter-group">
+                    <label><i class="fa-solid fa-bed"></i> Configuration</label>
+                    <select id="bhkSelect" onchange="filterListings()">
+                        <option value="All">All Configurations</option>
+                        <option value="Plot / Land">Plot / Land</option>
+                        <option value="2 BHK">2 BHK</option>
+                        <option value="3 BHK">3 BHK</option>
+                        <option value="4 BHK">4 BHK</option>
+                    </select>
+                </div>
+
+                <div class="filter-group">
+                    <label><i class="fa-solid fa-indian-rupee-sign"></i> Max Budget</label>
+                    <select id="budgetSelect" onchange="filterListings()">
+                        <option value="All">Any Budget</option>
+                        <option value="10000000">Under ₹ 1 Cr</option>
+                        <option value="20000000">Under ₹ 2 Cr</option>
+                        <option value="30000000">Under ₹ 3 Cr</option>
+                        <option value="50000000">Under ₹ 5 Cr</option>
+                    </select>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Categories -->
-    <section id="categories" class="section-padding bg-light">
-        <div class="container">
-            <div class="section-title">
-                <h2>Property Categories</h2>
-                <p>Filter our verified portfolio by property classification</p>
+    <!-- Property Listings Grid -->
+    <main class="container main-content">
+        <div class="section-title">
+            <div>
+                <h2>Featured Property & Plot Listings</h2>
+                <p>Browse verified active deals ready for registry or construction</p>
             </div>
-            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px;">
-                <div class="category-card" onclick="filterByCategory('Flat')">
-                    <i class="fas fa-building"></i>
-                    <h3>Apartments & Flats</h3>
-                </div>
-                <div class="category-card" onclick="filterByCategory('Plot')">
-                    <i class="fas fa-map"></i>
-                    <h3>Residential Plots</h3>
-                </div>
-                <div class="category-card" onclick="filterByCategory('Villa')">
-                    <i class="fas fa-home"></i>
-                    <h3>Luxury Villas</h3>
-                </div>
-            </div>
+            <div id="listingCount" class="count-badge">Loading...</div>
         </div>
-    </section>
 
-    <!-- Properties Listing -->
-    <section id="properties" class="section-padding">
-        <div class="container">
-            <div class="section-title">
-                <h2>Featured Properties</h2>
-                <p id="property-count">Loading listings...</p>
-                <button id="btn-reset-filter" class="btn btn-outline btn-sm" style="margin-top:8px;">Reset Filter</button>
-            </div>
-            <div id="property-grid" class="grid-cards"></div>
-        </div>
-    </section>
+        <div id="propertyGrid" class="property-grid"></div>
+    </main>
 
-    <!-- Projects Listing -->
-    <section id="projects" class="section-padding bg-light">
+    <!-- Construction & Estimator Section -->
+    <section class="construction-section" id="construction-section">
         <div class="container">
-            <div class="section-title">
-                <h2>Builder Projects</h2>
-                <p>Exclusive tie-ups with top real estate developers</p>
-            </div>
-            <div id="project-grid" class="grid-cards"></div>
-        </div>
-    </section>
-
-    <!-- About Section -->
-    <section id="about" class="section-padding">
-        <div class="container">
-            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 40px; align-items: center;">
-                <div>
-                    <img src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?auto=format&fit=crop&w=800&q=80" style="border-radius: var(--radius); box-shadow: var(--shadow-lg);" alt="Office">
-                </div>
-                <div>
-                    <h2 style="font-size: 2rem; margin-bottom: 15px;">Your Trusted Property Advisor</h2>
-                    <p style="margin-bottom: 20px; color: var(--text-muted);">Shree Shyam Property is dedicated to serving buyers, sellers, and investors with total transparency, site visit assistance, and legal documentation support across Haryana.</p>
-                    <ul>
-                        <li style="margin-bottom: 10px;"><i class="fas fa-check-circle" style="color:var(--accent)"></i> 100% Verified RERA Properties</li>
-                        <li style="margin-bottom: 10px;"><i class="fas fa-check-circle" style="color:var(--accent)"></i> Complete Legal & Loan Documentation Support</li>
-                        <li style="margin-bottom: 10px;"><i class="fas fa-check-circle" style="color:var(--accent)"></i> Free Site Visits with Professional Consultants</li>
+            <div class="construction-layout">
+                <div class="construction-text">
+                    <span class="badge-accent">Turnkey Construction</span>
+                    <h2>Build Your Home From Scratch</h2>
+                    <p>We handle architectural blueprints, municipal approvals, high-grade raw material procurement, structural fabrication, interior design, and turnkey possession.</p>
+                    <ul class="features-list">
+                        <li><i class="fa-solid fa-check"></i> Complete Turnkey Construction (A-to-Z Material & Labor)</li>
+                        <li><i class="fa-solid fa-check"></i> Standard, Premium & Luxury Finishing Packages</li>
+                        <li><i class="fa-solid fa-check"></i> Structural 10-Year Warranty with On-Time Completion</li>
                     </ul>
                 </div>
+
+                <!-- Cost Estimator Card -->
+                <div class="calculator-card">
+                    <h3><i class="fa-solid fa-calculator"></i> Construction Cost Estimator</h3>
+                    <div class="form-item">
+                        <label>Plot / Covered Area (Sq. Ft):</label>
+                        <input type="number" id="calcArea" placeholder="e.g. 1500" value="1000" oninput="runCalculator()">
+                    </div>
+                    <div class="form-item">
+                        <label>Finishing Package:</label>
+                        <select id="calcPackage" onchange="runCalculator()">
+                            <option value="1500">Standard Package (₹ 1,500/sq ft)</option>
+                            <option value="1850" selected>Premium Package (₹ 1,850/sq ft)</option>
+                            <option value="2300">Luxury Turnkey (₹ 2,300/sq ft)</option>
+                        </select>
+                    </div>
+                    <div class="estimate-result">
+                        <small>Approx. Construction Estimate:</small>
+                        <div id="calcTotal">₹ 18,50,000</div>
+                    </div>
+                    <button class="btn-whatsapp-full" onclick="sendConstructionWhatsApp()">
+                        <i class="fa-brands fa-whatsapp"></i> Get Custom Quotation on WhatsApp
+                    </button>
+                </div>
             </div>
         </div>
     </section>
 
-    <!-- Contact Section -->
-    <section id="contact" class="section-padding bg-light">
-        <div class="container">
-            <div class="section-title">
-                <h2>Connect With Our Experts</h2>
-                <p>Schedule a site visit or ask a property query</p>
+    <!-- Contact & Lead Form -->
+    <section class="contact-section" id="contact-section">
+        <div class="container contact-grid">
+            <div>
+                <h2>Looking to Sell or Buy Property?</h2>
+                <p>Connect directly with our property and plot specialists for zero-hassle documentation, site visits, and instant valuations.</p>
+                <div class="contact-details">
+                    <p><i class="fa-solid fa-phone"></i> Direct Call: +91 99999 99999</p>
+                    <p><i class="fa-brands fa-whatsapp"></i> WhatsApp Support: +91 99999 99999</p>
+                    <p><i class="fa-solid fa-envelope"></i> Email: info@primeproperties.com</p>
+                </div>
             </div>
-
-            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 40px;">
-                <div>
-                    <h3>Office Contact</h3>
-                    <p style="margin: 15px 0;" data-brand="address">Gurugram & Jind, Haryana</p>
-                    <p style="margin-bottom: 10px;"><i class="fas fa-phone" style="color:var(--accent)"></i> <a href="#" data-brand="phone">+91 XXXXX XXXXX</a></p>
-                    <p style="margin-bottom: 20px;"><i class="fas fa-envelope" style="color:var(--accent)"></i> <span data-brand="email">info@shreeshyamproperty.com</span></p>
-
-                    <iframe src="https://maps.google.com/maps?q=Gurugram&t=&z=13&ie=UTF8&iwloc=&output=embed" width="100%" height="220" style="border:0; border-radius: var(--radius);" allowfullscreen="" loading="lazy"></iframe>
-                </div>
-
-                <div>
-                    <form id="contact-form" style="background:#FFF; padding:30px; border-radius: var(--radius); border: 1px solid var(--border-color);">
-                        <div class="form-group" style="margin-bottom:12px;">
-                            <label>Full Name *</label>
-                            <input type="text" id="enq-name" class="form-control" required placeholder="Enter your name">
-                        </div>
-                        <div class="form-group" style="margin-bottom:12px;">
-                            <label>Phone Number *</label>
-                            <input type="tel" id="enq-phone" class="form-control" required placeholder="+91 98120XXXXX">
-                        </div>
-                        <div class="form-group" style="margin-bottom:12px;">
-                            <label>Email Address</label>
-                            <input type="email" id="enq-email" class="form-control" placeholder="your@email.com">
-                        </div>
-                        <div class="form-group" style="margin-bottom:12px;">
-                            <label>Property Interested In</label>
-                            <input type="text" id="enq-property" class="form-control" placeholder="e.g. 3 BHK Golf Course Road">
-                        </div>
-                        <div class="form-group" style="margin-bottom:18px;">
-                            <label>Message / Visit Details</label>
-                            <textarea id="enq-message" class="form-control" rows="3" placeholder="Tell us about your requirements..."></textarea>
-                        </div>
-                        <button type="submit" class="btn btn-primary" style="width: 100%;">Submit Inquiry</button>
-                    </form>
-                </div>
+            <div class="contact-card">
+                <h3>Request a Callback</h3>
+                <form id="leadForm" onsubmit="submitLead(event)">
+                    <input type="text" id="leadName" placeholder="Your Full Name" required>
+                    <input type="tel" id="leadPhone" placeholder="Mobile Number" required>
+                    <select id="leadService">
+                        <option value="Buy Flat/House">Looking to Buy a Flat/House</option>
+                        <option value="Buy Plot">Looking for Residential/Commercial Plot</option>
+                        <option value="Sell Property">Looking to Sell My Property</option>
+                        <option value="Construction">Looking for Building / Construction</option>
+                    </select>
+                    <textarea id="leadMsg" rows="3" placeholder="Brief requirement (e.g., 3 BHK in Sector 6, Budget 2 Cr)"></textarea>
+                    <button type="submit" class="btn-submit">Submit Inquiry</button>
+                </form>
             </div>
         </div>
     </section>
 
     <!-- Property Details Modal -->
-    <div id="property-modal" class="modal-overlay">
-        <div class="modal-container">
-            <button class="modal-close" onclick="closeModal()">&times;</button>
-            <div id="modal-dynamic-content" class="modal-body"></div>
+    <div id="detailsModal" class="modal">
+        <div class="modal-box">
+            <button class="modal-close" onclick="closeDetails()">&times;</button>
+            <div id="modalBody"></div>
         </div>
     </div>
 
-    <!-- Floating WhatsApp Action -->
-    <a href="#" data-brand="whatsapp" target="_blank" class="floating-whatsapp" aria-label="WhatsApp Us">
-        <i class="fab fa-whatsapp"></i>
-    </a>
+    <!-- Admin Panel Modal -->
+    <div id="adminModal" class="modal">
+        <div class="modal-box admin-modal-box">
+            <button class="modal-close" onclick="closeAdmin()">&times;</button>
+            <div id="adminAuth">
+                <h3><i class="fa-solid fa-shield-halved"></i> Admin Authentication</h3>
+                <p>Enter your 4-digit PIN to manage listings (Default: 1234)</p>
+                <input type="password" id="adminPinInput" placeholder="Enter PIN" style="margin: 1rem 0;">
+                <button class="btn-submit" onclick="verifyAdminPin()">Log In</button>
+            </div>
+
+            <div id="adminDashboard" style="display: none;">
+                <div class="admin-top">
+                    <h3>Property Inventory Manager</h3>
+                    <button class="btn-export" onclick="exportUpdatedJson()"><i class="fa-solid fa-download"></i> Download Updated properties.json</button>
+                </div>
+
+                <!-- Add Form -->
+                <form id="addPropertyForm" onsubmit="adminSaveProperty(event)">
+                    <div class="admin-grid-form">
+                        <input type="text" id="admTitle" placeholder="Property Title" required>
+                        <select id="admCategory">
+                            <option value="Society Flat">Society Flat</option>
+                            <option value="Plot">Plot / Land</option>
+                            <option value="Builder Floor">Builder Floor</option>
+                            <option value="DDA Flat">DDA Flat</option>
+                        </select>
+                        <input type="text" id="admBhk" placeholder="Configuration (e.g. 3 BHK / 150 Gaj)" required>
+                        <input type="text" id="admArea" placeholder="Area (e.g. 1650 sq-ft)" required>
+                        <input type="number" id="admPrice" placeholder="Numeric Price (e.g. 25000000)" required>
+                        <input type="text" id="admDisplayPrice" placeholder="Display Price (e.g. ₹ 2.50 Cr)" required>
+                        <input type="text" id="admSector" placeholder="Sector / Area (e.g. Sector 10)" required>
+                        <input type="text" id="admLocation" placeholder="Full Address / Locality" required>
+                        <input type="url" id="admImage" placeholder="Image URL (Unsplash or direct link)" required>
+                        <select id="admStatus">
+                            <option value="Available">Available</option>
+                            <option value="Sold">Sold</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="btn-submit" style="margin-top: 1rem;">+ Add New Listing</button>
+                </form>
+
+                <hr style="margin: 1.5rem 0; border: 0; border-top: 1px solid #334155;">
+
+                <h4>Current Listings (<span id="adminListCount">0</span>)</h4>
+                <div id="adminTableContainer" class="admin-table-container"></div>
+            </div>
+        </div>
+    </div>
 
     <!-- Footer -->
-    <footer class="site-footer">
-        <div class="container">
-            <div class="footer-grid">
-                <div>
-                    <h3 class="brand-font" data-brand="name" style="color:#FFF; margin-bottom:10px;">SHREE SHYAM PROPERTY</h3>
-                    <p style="color: #94A3B8; font-size: 0.9rem;" data-brand="tagline">Your Preferred Real Estate Partner</p>
-                </div>
-                <div class="footer-col">
-                    <h4>Navigation</h4>
-                    <ul>
-                        <li><a href="#home">Home</a></li>
-                        <li><a href="#properties">Properties</a></li>
-                        <li><a href="#projects">Projects</a></li>
-                        <li><a href="admin.html">CRM Portal</a></li>
-                    </ul>
-                </div>
-                <div class="footer-col">
-                    <h4>Categories</h4>
-                    <ul>
-                        <li><a href="#properties">Flats & Apartments</a></li>
-                        <li><a href="#properties">Residential Plots</a></li>
-                        <li><a href="#properties">Luxury Villas</a></li>
-                    </ul>
-                </div>
-                <div class="footer-col">
-                    <h4>Location</h4>
-                    <p style="font-size:0.85rem; color:#94A3B8;" data-brand="address">Haryana, India</p>
-                </div>
-            </div>
-            <div class="footer-bottom">
-                <p>&copy; 2026 <span data-brand="name">SHREE SHYAM PROPERTY</span>. All Rights Reserved.</p>
-            </div>
+    <footer>
+        <div class="container footer-content">
+            <p>&copy; 2026 Prime Homes & Builders. All rights reserved.</p>
+            <p>Designed for fast, database-free property deals & construction.</p>
         </div>
     </footer>
 
