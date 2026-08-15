@@ -16,10 +16,22 @@
     "youtube": ""
   },
   "stats": [
-    { "label": "Years in Dehradun", "value": "12+" },
-    { "label": "Properties Handled", "value": "300+" },
-    { "label": "Happy Families", "value": "250+" },
-    { "label": "Active Construction Sites", "value": "8" }
+    {
+      "label": "Years in Dehradun",
+      "value": "12+"
+    },
+    {
+      "label": "Properties Handled",
+      "value": "300+"
+    },
+    {
+      "label": "Happy Families",
+      "value": "250+"
+    },
+    {
+      "label": "Active Construction Sites",
+      "value": "8"
+    }
   ],
   "about": "Shri Syam Builder & Property has been helping families and investors buy, sell and build across Dehradun for over a decade. From residential plots in Sahastradhara and Rajpur Road to ready flats near Clement Town and turnkey construction contracts in the Doon valley — every deal is handled with clear paperwork and straight talk, no games.",
   "services": [
@@ -74,12 +86,12 @@
       "title": "Independent Kothi",
       "type": "Home",
       "location": "Rajpur Road, Dehradun",
+      "status": "For Sale",
       "price": "₹1,25,00,000",
       "area": "300 Sq. Yd.",
-      "status": "For Sale",
-      "featured": false,
-      "image": "",
-      "description": "Two-storey independent home with garden, servant quarter and covered car porch."
+      "image": "https://media.designcafe.com/wp-content/uploads/2020/09/25151904/2bhk-apartment-living-room-interior-design.jpg",
+      "description": "Two-storey independent home with garden, servant quarter and covered car porch.",
+      "featured": false
     },
     {
       "id": "p4",
