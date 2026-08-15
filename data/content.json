@@ -8,7 +8,7 @@
   "address": "Dehradun, Uttarakhand, India",
   "mapQuery": "Dehradun, Uttarakhand",
   "adminPassword": "syam@2026",
-  "leadsWebhookUrl": "",
+  "leadsWebhookUrl": "https://script.google.com/macros/s/AKfycbyWP7hjlZNT2-n7yHQ68u-gblxk0LRaDcuiePIcWJuqm66fHKD6MFdvXz66eni-Mrqz/exec",
   "leadsSheetCsvUrl": "",
   "social": {
     "facebook": "",
