@@ -9,7 +9,7 @@
   "mapQuery": "Dehradun, Uttarakhand",
   "adminPassword": "syam@2026",
   "leadsWebhookUrl": "https://script.google.com/macros/s/AKfycbyWP7hjlZNT2-n7yHQ68u-gblxk0LRaDcuiePIcWJuqm66fHKD6MFdvXz66eni-Mrqz/exec",
-  "leadsSheetCsvUrl": "",
+  "leadsSheetCsvUrl": "https://docs.google.com/spreadsheets/d/e/2PACX-1vRJEWslBCdUSTL8OYmkULGj4MXUZJ4Cgi7JboV_4gmR0y8sAMz92uU2qAsbcUOT7SigXfh2SeFO9Bd1/pub?gid=0&single=true&output=csv",
   "social": {
     "facebook": "",
     "instagram": "",
